@@ -38,6 +38,7 @@ folderID
 | Date | Contributor | Summary |
 | ---- | ----------- | ------- |
 | Sun. 4/24 | Darius | ReadMe file, initial commit. |
+| Tues. 4/26 | Darius | Navigator / TopBar component. Began SideBar, ViewPort. Need to review documentation on passing data between parent and child in SPA format. |
 
 ## Project Planning
 | Date | Goals |
