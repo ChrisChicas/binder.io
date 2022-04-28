@@ -1,27 +1,39 @@
-import {React, UseEffect, UseState} from 'react'
-import {Button, Offcanvas} from 'react-bootstrap'
+//SideBar component to navigate Binders and notes. Should later include buttons for adding, editing and deleting binders and notes.
+
+//imports
+import {React, useEffect, useState} from 'react';
+import {Button, ButtonGroup, Offcanvas} from 'react-bootstrap';
+import Binders from './Binders';
+
 
 
 
 export default function SideBar(props){
-    const [visible, setVisible] = UseState();
-    const handleClose = () => setVisible(false)
-    const handleShow = () => setVisible(true)
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
-    return (
-        <div>
-            <Button variant="primary" onClick={handleShow}>
-                Open Binder Explorer
-            </Button>
+   return (
+       <div>
+           <Button variant="primary" onClick={handleShow}>
+               Open Binder Tab
+           </Button>
 
-            <Offcanvas show={visible} onHide={handleClose}>
+            <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Explorer</Offcanvas.Title>
+                    <Offcanvas.Title>Binders</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    Binder list goes here. Binder list would be a list of the binders, tabbed to include list of notes within each binder. pending.
+                    <ButtonGroup>
+                        <Button variant="secondary">New Binder</Button>
+                        <Button variant="secondary">Edit Binders</Button>
+                        <Button variant="danger">Delete Binders</Button>
+                    </ButtonGroup>
+                        
+                   <Binders/>
                 </Offcanvas.Body>
             </Offcanvas>
-        </div>
-    )
+       </div>
+   
+   )
 }
