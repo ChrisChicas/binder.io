@@ -39,7 +39,8 @@ folderID
 | ---- | ----------- | ------- |
 | Sun. 4/24 | Darius | ReadMe file, initial commit. |
 | Tues. 4/26 | Darius | Navigator / TopBar component. Began SideBar, ViewPort. Need to review documentation on passing data between parent and child in SPA format. |
-| Tues. 4/26 | Chris | Skeletons for BinderContent, Binders, CreateBinders, CreateNote, EditNote, Home, LogIn, NoteContent, SignUp, UserSettings. | 
+| Tues. 4/26 | Chris | Skeletons for BinderContent, Binders, CreateBinders, CreateNote, EditNote, Home, LogIn, NoteContent, SignUp, UserSettings. |
+| Thurs. 4/28 | Darius | SideBar content. Binder.js content. Binder.js returns list of binders. Binder.js is currently imported into SideBar. Began work on LogIn form. | 
 
 ## Project Planning
 | Date | Goals |
