@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header(props){
     const navigate = useNavigate()
-    const handleClick = () => {
-        props.setUserID("")
+    const signOut = () => {
+        props.setLoggedIn(false)
+        props.setLoggedOut(true)
         navigate("/")
     }
-        if(props.userID == ""){
+        if(props.loggedIn == false){
             return (
                     <div>
                         <Navbar bg="light" expand="lg">
@@ -50,11 +51,11 @@ export default function Header(props){
                                 Binder.io</p>
                             </Navbar.Brand>
                             <Nav>
-                                    <Nav.Link>
-                                        <Button variant="success" onClick={handleClick}>
-                                            Sign Out
-                                        </Button>
-                                    </Nav.Link>
+                                <Nav.Link>
+                                    <Button variant="success" onClick={signOut}>
+                                        Sign Out
+                                    </Button>
+                                </Nav.Link>
                             </Nav> 
                     </Navbar>
                 </div>  
