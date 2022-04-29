@@ -3,12 +3,16 @@
 //imports
 import React from "react";
 import {Nav, Navbar, Button} from "react-bootstrap";
-import {LinkContainer} from 'react-router-bootstrap';
-
-
+import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(props){
-        if(props.userID == null){
+    const navigate = useNavigate()
+    const handleClick = () => {
+        props.setUserID("")
+        navigate("/")
+    }
+        if(props.userID == ""){
             return (
                     <div>
                         <Navbar bg="light" expand="lg">
@@ -38,22 +42,24 @@ export default function Header(props){
             )
 
         }else{
+            return(
+                <div>
+                    <Navbar bg="light" expand="lg">
+                    <Navbar.Brand href="#home">
+                            <p>
+                                Binder.io</p>
+                            </Navbar.Brand>
+                            <Nav>
+                                    <Nav.Link>
+                                        <Button variant="success" onClick={handleClick}>
+                                            Sign Out
+                                        </Button>
+                                    </Nav.Link>
+                            </Nav> 
+                    </Navbar>
+                </div>  
+            )
             
-            <div>
-                <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">
-                        <p>
-                           Binder.io</p>
-                        </Navbar.Brand>
-                        <Nav>
-                            <Nav.Link href="#SignUp">
-                                <Button variant="success">
-                                    Sign Out
-                                </Button>
-                            </Nav.Link>
-                        </Nav> 
-                </Navbar>
-            </div>
         }
         console.log("Navigator loaded")
         
