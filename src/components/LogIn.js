@@ -4,25 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function LogIn(props){
-    const [inputUserId, setInputUserId] = useState("")
+    const [inputUserName, setinputUserName] = useState("")
     const [inputPassword, setInputPassword] = useState("")
     const [badAttempt, setBadAttempt] = useState(false)
     const navigate = useNavigate()
-    const credentialsCheck = e => {
+    const credentialsCheck = async (e) => {
         e.preventDefault()
-        // temp credential check logic logic below
-        if(inputUserId !== "" && inputPassword !== ""){
-            // insert credential check logic here, thinking an if-else statement to match inputUserId and a findone from database, then check password?
-            login()
+        const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertable/${inputUserName}`)
+        const userData = await userResponse.json()
+        if(inputPassword == userData.Password){
+            login(userData.UserId)
         } else{
             setBadAttempt(true)
-            setInputUserId("")
+            setinputUserName("")
             setInputPassword("")
         }
       }
 
-    const login = () => {
+    const login = userId => {
         props.setLoggedIn(true)
+        props.setUserId(userId)
         navigate("/binder")
     }
 
@@ -33,7 +34,7 @@ export default function LogIn(props){
             <Form onSubmit={credentialsCheck}>
                 <Form.Group className="mb-3" controlId="formUsername">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" value={inputUserId} onChange={e => {setInputUserId(e.target.value)}}/>
+                    <Form.Control type="text" placeholder="Enter username" value={inputUserName} onChange={e => {setinputUserName(e.target.value)}}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formPassword">
                     <Form.Check.Label>Password</Form.Check.Label>
