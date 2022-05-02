@@ -12,6 +12,7 @@ import { useState } from "react";
 import tempData from './BinderData'
 
 function App() {
+  const [userId, setUserId] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
   const [loggedOut, setLoggedOut] = useState(false)
 
@@ -21,9 +22,9 @@ function App() {
         <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedOut={setLoggedOut}/>
         <Routes>
           <Route path="/" element={<Home loggedOut={loggedOut} setLoggedOut={setLoggedOut}/>}/>
-          <Route path="/login" element={<LogIn setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/binder" element={<BinderView Binders={tempData.Binders}/>}/>
+          <Route path="/login" element={<LogIn setLoggedIn={setLoggedIn} setUserId={setUserId}/>}/>
+          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setUserId={setUserId}/>}/>
+          <Route path="/binder" element={<BinderView Binders={tempData.Binders} userId={userId}/>}/>
           <Route path="/note/:id" element={<NoteView/>}/>
         </Routes>
       </Router>
