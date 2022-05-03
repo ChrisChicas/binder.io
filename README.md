@@ -31,9 +31,6 @@ Models for SQL Tables
 
 | NoteId | BinderId | NoteTitle | NoteContent | DateModified | 
 
-
-folderID
-
 ## Tasks
 | Date | Contributor | Summary |
 | ---- | ----------- | ------- |

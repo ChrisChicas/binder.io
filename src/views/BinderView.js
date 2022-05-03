@@ -1,17 +1,20 @@
 //Tabbed Binder Viewing page
 import CreateBinderForm from '../components/CreateBinder'
 import NoteCards from '../components/NoteCards'
-import {React} from 'react'
+import {React, useEffect} from 'react'
 import {Tab, Tabs, Container} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 
-export default function DocumentView(props){
+export default async function DocumentView(props){
+    let binders = await fetch(`https://binders-io-api.herokuapp.com/userbinders/${props.userId}`,{
+        method : 'GET'
+    })
     
-    const tabs = props.Binders.map((binder)=>{
+    const tabs = binders.map((binder)=>{
         return (
             <Tab 
-                eventKey={`/binder/${binder.id}`}
-                title={binder.name}
+                eventKey={`/binder/${binder.BinderId}`}
+                title={binder.BinderTitle}
                 >
                 <NoteCards notes={binder.notes}/>
             </Tab>

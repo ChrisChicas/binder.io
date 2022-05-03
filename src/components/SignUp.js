@@ -7,6 +7,7 @@ export default function SignUp(props){
     const [inputUserName, setinputUserName] = useState("")
     const [inputPassword, setInputPassword] = useState("")
     const [badAttempt, setBadAttempt] = useState(false)
+    const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
     const newUserData = {
         UserName : inputUserName,
@@ -26,6 +27,7 @@ export default function SignUp(props){
             setBadAttempt(true)
             setinputUserName("")
             setInputPassword("")
+            setErrMessage("Username and password cannot be blank.")
         }
       }
 
@@ -41,14 +43,18 @@ export default function SignUp(props){
                 props.setLoggedIn(true)
                 props.setUserId(data.userId)
                 navigate("/binder")
-          })
+            })
+            .catch(err =>{
+              console.log('ERROR' , err)
+              setErrMessage('Server Communication error, please try again')
+            })
         
     }
 
     
     return(
         <div className="center">
-            {badAttempt ? <Alert variant="danger">Username or password do not meet requirements. Please try again.</Alert> : null}
+            {badAttempt ? <Alert variant="danger">{errMessage}</Alert> : null}
             <h1>Sign Up</h1>
             <Form onSubmit={requirementsCheck}>
                 <Form.Group className="mb-3" controlId="formCreateUsername">
