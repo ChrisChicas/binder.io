@@ -2,7 +2,7 @@
 import CreateBinderForm from '../components/CreateBinder'
 import NoteCards from '../components/NoteCards'
 import {React} from 'react'
-import {Tab, Tabs} from 'react-bootstrap'
+import {Tab, Tabs, Container} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 
 export default function DocumentView(props){
@@ -19,16 +19,19 @@ export default function DocumentView(props){
     })
     return (
         <div>
-            <h2>Binder Viewer</h2>
-            <Tabs>
+            <Container>
+                <h2>Binder Viewer</h2>
+                <Tabs>
+                    
+                        <Tab eventKey={'#newBinder'} title="Add">
+                            <CreateBinderForm/>
+                        </Tab>
                 
-                    <Tab eventKey={'#newBinder'} title="Add">
-                        <CreateBinderForm/>
-                    </Tab>
-              
-                
-                {tabs}
-            </Tabs>
+                    
+                    {tabs}
+                </Tabs>
+            </Container>
+            
         </div>
     )
 }

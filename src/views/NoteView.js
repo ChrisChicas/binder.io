@@ -2,10 +2,22 @@
 
 //imports
 import {React} from 'react'
-import {Form} from 'react-bootstrap'
+import {Form, Container} from 'react-bootstrap'
 
 export default function NoteView(props){
     return (
-        <h2>Note Viewer</h2>
+        <Container>
+            <h2>Note Viewer</h2>
+            <h2>{props.title}</h2>
+            <Form>
+            <Form.Group>
+                <Form.Label>
+
+                </Form.Label>
+            </Form.Group>
+            </Form>
+
+        </Container>
+        
     )
 }

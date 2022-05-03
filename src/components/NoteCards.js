@@ -16,8 +16,8 @@ export default function NoteCards(props){
                     <Card.Text>
                         {preview}
                     </Card.Text>
-                    <Card.Link href={`/note/:id`}>View</Card.Link>
-                    <Card.Link href={`/note/:id/edit`}>Edit</Card.Link>
+                    <Card.Link href={`/note/${note.noteID}`}>View</Card.Link>
+                    <Card.Link href={`/note/${note.noteID}/edit`}>Edit</Card.Link>
                 </Card.Body>
             </Card>
         )
