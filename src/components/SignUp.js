@@ -33,10 +33,11 @@ export default function SignUp(props){
 
       async function signUp(){
           //fetch request to POST new user to usertable
-          await fetch('https://binders-io-api.herokuapp.com/usertable/',
+          await fetch('https://binder-io-api.herokuapp.com/usertable/',
             {
                 method : 'POST',
-                body : JSON.stringify(newUserData),                
+                body : JSON.stringify(newUserData),
+                mode : 'no-cors'                
             })
             .then(data => data.json())
             .then(data => {
