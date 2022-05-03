@@ -16,7 +16,7 @@ export default async function DocumentView(props){
                 eventKey={`/binder/${binder.BinderId}`}
                 title={binder.BinderTitle}
                 >
-                <NoteCards notes={binder.notes}/>
+                <NoteCards binderId={binder.binderId}/>
             </Tab>
         )
     })

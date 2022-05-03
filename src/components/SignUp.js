@@ -10,9 +10,9 @@ export default function SignUp(props){
     const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
     const newUserData = {
-        UserName : inputUserName,
-        Password : inputPassword,
-        DisplayName : inputUserName        
+        userName : inputUserName,
+        password : inputPassword,
+        displayName : inputUserName        
     }
 
     const requirementsCheck = async (e) => {

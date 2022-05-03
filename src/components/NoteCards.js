@@ -2,22 +2,34 @@
 
 //imports
 import {React} from 'react';
-import {Card} from 'react-bootstrap';
+import {Card, Button} from 'react-bootstrap';
 
 //function
-export default function NoteCards(props){
-    const display = props.notes.map((note)=>{
+export default async function NoteCards(props){
+    let response = await fetch(`https://binder-io-api.herokuapp.com/notetable/${props.binderId}`,{
+        method : "GET"
+    })
+    let notes = response.json()
+    const display = notes.map((note)=>{
         const preview = note.noteContent
         return (
             <Card>
                 <Card.Body>
-                    <Card.Title>{note.NoteTitle}</Card.Title>
+                    <Card.Title>{note.noteTitle}</Card.Title>
                     <Card.Subtitle className="text-muted">{note.dateCreated}</Card.Subtitle>
                     <Card.Text>
                         {preview}
                     </Card.Text>
-                    <Card.Link href={`/note/${note.noteID}`}>View</Card.Link>
-                    <Card.Link href={`/note/${note.noteID}/edit`}>Edit</Card.Link>
+                    <Card.Link href={`/note/${note.noteId}`}>
+                        <Button>
+                            View
+                        </Button>
+                    </Card.Link>
+                    <Card.Link href={`/note/${note.noteId}/edit`}>
+                        <Button>
+                            Edit
+                        </Button>
+                    </Card.Link>
                 </Card.Body>
             </Card>
         )

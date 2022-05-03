@@ -3,7 +3,7 @@ import { Form, Button, Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function LogIn(props){
+export default async function LogIn(props){
     const [inputUserName, setinputUserName] = useState("")
     const [inputPassword, setInputPassword] = useState("")
     const [badAttempt, setBadAttempt] = useState(false)
@@ -13,7 +13,7 @@ export default function LogIn(props){
         const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertable/${inputUserName}`)
         const userData = await userResponse.json()
         if(inputPassword == userData.Password){
-            login(userData.UserId)
+            login(userData.userId)
         } else{
             setBadAttempt(true)
             setinputUserName("")
