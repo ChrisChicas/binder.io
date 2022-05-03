@@ -1,20 +1,15 @@
 // Component for the log in screen
 //imports
 import React from 'react';
-import {Form, Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
+import LogInForm from '../components/LogInForm'
+
 export default function LogIn(){
     return(
         <div>
-            <Form>
-                <Form.Group>
-                    <Form.Label>UserName</Form.Label>
-                    <Form.Control placeholder="Enter UserName"/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control placeholder="Enter password"/>
-                </Form.Group>
-            </Form>
+            <Container>
+                <LogInForm/>
+            </Container>
         </div>
     )
 }

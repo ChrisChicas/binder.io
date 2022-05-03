@@ -2,7 +2,7 @@
 
 //imports
 import React from "react";
-import {Nav, Navbar, Button} from "react-bootstrap";
+import {Nav, Navbar, Button, Container} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function Header(props){
         props.setLoggedOut(true)
         navigate("/")
     }
-        if(props.loggedIn == false){
+        if(props.loggedIn === false){
             return (
                     <div>
                         
@@ -66,7 +66,5 @@ export default function Header(props){
                 </div>  
             )
             
-        }
-        console.log("Navigator loaded")
-        
+        }      
 }
