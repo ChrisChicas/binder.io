@@ -8,12 +8,20 @@ export default function SignUp(props){
     const [inputPassword, setInputPassword] = useState("")
     const [badAttempt, setBadAttempt] = useState(false)
     const navigate = useNavigate()
+    const newUserData = {
+        UserName : inputUserName,
+        Password : inputPassword,
+        DisplayName : inputUserName        
+    }
+
     const requirementsCheck = async (e) => {
         e.preventDefault()
-        const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertable/${inputUserName}`)
-        const userData = await userResponse.json()
+
         if(inputUserName !== "" && inputPassword !== ""){
-            login(userData.UserId)
+            signUp()
+            
+            
+                
         } else{
             setBadAttempt(true)
             setinputUserName("")
@@ -21,10 +29,20 @@ export default function SignUp(props){
         }
       }
 
-    const login = userId => {
-        props.setLoggedIn(true)
-        props.setUserId(userId)
-        navigate("/binder")
+      async function signUp(){
+          //fetch request to POST new user to usertable
+          await fetch('https://binders-io-api.herokuapp.com/usertable/',
+            {
+                method : 'POST',
+                body : JSON.stringify(newUserData),                
+            })
+            .then(data => data.json())
+            .then(data => {
+                props.setLoggedIn(true)
+                props.setUserId(data.userId)
+                navigate("/binder")
+          })
+        
     }
 
     
