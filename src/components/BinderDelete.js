@@ -6,6 +6,7 @@ export default function BinderDeleteButton(props){
         await fetch(`https://binder-io-api.herokuapp.com/userbinders/${props.binderId}`,{
             method: "DELETE"
         })
+       // window.location = "/binder" 
         .catch(err => console.log(err))
     }
     return (

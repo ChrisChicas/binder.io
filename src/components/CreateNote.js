@@ -26,6 +26,7 @@ export default function CreateNote(props){
                         updatedAt : date.toUTCString()})
             })
         }
+        // window.location = "/"; need to update route for notes
     }
 
     return(
