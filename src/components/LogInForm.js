@@ -10,7 +10,9 @@ export default async function LogIn(props){
     const navigate = useNavigate()
     const credentialsCheck = async (e) => {
         e.preventDefault()
-        const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertable/${inputUserName}`)
+        const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertable/name/${inputUserName}`,{
+            method : "GET"
+        })
         const userData = await userResponse.json()
         if(inputPassword == userData.Password){
             login(userData.userId)

@@ -6,7 +6,7 @@ import {Card, Button} from 'react-bootstrap';
 
 //function
 export default async function NoteCards(props){
-    let response = await fetch(`https://binder-io-api.herokuapp.com/notetable/${props.binderId}`,{
+    let response = await fetch(`https://binder-io-api.herokuapp.com/notetable/binder/${props.binderId}`,{
         method : "GET"
     })
     let notes = response.json()
@@ -15,19 +15,18 @@ export default async function NoteCards(props){
         return (
             <Card>
                 <Card.Body>
-                    <Card.Title>{note.noteTitle}</Card.Title>
                     <Card.Subtitle className="text-muted">{note.dateCreated}</Card.Subtitle>
                     <Card.Text>
                         {preview}
                     </Card.Text>
                     <Card.Link href={`/note/${note.noteId}`}>
                         <Button>
-                            View
+                           Edit
                         </Button>
                     </Card.Link>
                     <Card.Link href={`/note/${note.noteId}/edit`}>
                         <Button>
-                            Edit
+                            Delete
                         </Button>
                     </Card.Link>
                 </Card.Body>
