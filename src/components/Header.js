@@ -51,9 +51,10 @@ export default function Header(props){
             return(
                 <div>
                     <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="#home">
-                            <p>
-                                Binder.io</p>
+                        <Container>
+                            <Navbar.Brand href="#home">
+                                <p>
+                                    Binder.io</p>
                             </Navbar.Brand>
                             <Nav>
                                 <Nav.Link>
@@ -61,8 +62,11 @@ export default function Header(props){
                                         Sign Out
                                     </Button>
                                 </Nav.Link>
-                            </Nav> 
-                    </Navbar>
+                            </Nav>
+                            </Container> 
+                        </Navbar>
+                        
+                    
                 </div>  
             )
             

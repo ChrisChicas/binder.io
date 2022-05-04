@@ -4,7 +4,7 @@
 import {React, useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 
-export default async function CreateBinder(){
+export default function CreateBinder(props){
     //binderName state
     let [newBinderName, setBinderName] = useState('')
     //requirement check
@@ -12,9 +12,11 @@ export default async function CreateBinder(){
         e.preventDefault()
         //if newBinderName is not empty, run a fetch request, method POST, body including bindername and userId
         if(newBinderName != ""){
+            let date = new Date()
             await fetch(`https://binder-io-api.herokuapp.com/userBinders/`,{
                     method : 'POST',
-                    body : JSON.stringify({binderName : newBinderName,userId : props.userId})
+                    headers : {"Content-Type":"application/json"},
+                    body : JSON.stringify({binderTitle : newBinderName,userId : props.userId, dateCreated : date.toUTCString()})
             })
         }
     }
