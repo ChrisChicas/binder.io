@@ -1,65 +1,52 @@
 import React, { Fragment, useState } from "react";
-const EditNote = (noteId) => {
+import {Modal, Form, Button} from 'react-bootstrap'
+const EditNote = ({note}) => {
+  const [show, setShow] = useState(false)
+  const handleClose = () => {setShow(false)}
+  const handleShow = () => {setShow(true)}
+  const [newNoteData, setNewNoteData] = useState(note.noteContent)
 
-    
+  const requirementCheck = async (e)=>{
+    e.preventDefault()
+        
+        if(newNoteData != ""){
+            let date = new Date()
+            await fetch(`https://binder-io-api.herokuapp.com/notes/${note.noteId}`,{
+                    method : 'PUT',
+                    headers : {"Content-Type":"application/json"},
+                    body : JSON.stringify({noteContent : newNoteData, updatedAt : date.toUTCString()})
+            })
+        }
+       // window.location = "/binder"
+  }
   return (
+
     <Fragment>
-      <button
-        type="button"
-        class="btn btn-warning"
-        data-toggle="modal"
-        data-target={`#noteId${notes.noteId}`}
-      >
-        Edit
-      </button>
-      <div
-        class="modal"
-        id={`noteId${notes.noteId}`}
-        onClick={() => setDescription(notes.noteContent)}
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit Note</h4>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                onClick={() => setDescription(notes.noteContent)}
-              >
-                &times;
-              </button>
-            </div>
-            <div class="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-warning"
-                data-dismiss="modal"
-                onClick={e => updateDescription(e)}
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                data-dismiss="modal"
-                onClick={() => setDescription(notes.noteContent)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Fragment>
-  );
+      <Button style={{marginRight: "5px"}} className="mb-3" size="sm" variant="primary" onClick={handleShow}>Edit</Button>
+      <Modal
+        show={show}
+        onHide={handleClose}>
+    <Modal.Header closeButton>
+  <Modal.Title>{note.createdAt}</Modal.Title>
+  </Modal.Header>
+                        <Form onSubmit={(e)=>{
+                          requirementCheck(e)
+                          handleClose()
+                        }}>
+                            <Form.Group>
+                                <Form.Label>Binder Name</Form.Label>
+                                <Form.Control type="text" placeholder={note.noteContent} value={newNoteData} onChange={e => {setNewNoteData(e.target.value)}}/>
+                            </Form.Group>
+                            <Button variant="primary" type="submit">
+                                Save Changes
+                            </Button>
+                </Form>
+
+                </Modal>
+                </Fragment>
+  )
+    
+  
+  
 };
 export default EditNote;

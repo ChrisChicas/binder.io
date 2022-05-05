@@ -1,27 +1,32 @@
 // Component meant to fit into BinderView.js, displaying Notes and a portion of their contents as cards.
 
 //imports
-import {React, useState, useEffect} from 'react';
-import {Card, Button, Container} from 'react-bootstrap';
+import {React, useState, useEffect, Fragment} from 'react';
+import {Card, Button, Container, Modal, Form} from 'react-bootstrap';
 import CreateNote from './CreateNote'
+import EditNote from './EditNote'
 //function
 export default function NoteCards(props){
     const [notes, setNotes] = useState([])
+    
     let cards
     if (notes){
         cards = notes.map((note, index) => {
             return(
-              <Card key={index}>
-                <Card.Title>{note.createdAt}</Card.Title>
-                <Card.Body>
-                    {note.noteContent}
-                    <div style={{marginTop: "5px"}}>
-                        <Button style={{marginRight: "5px"}} className="mb-3" size="sm" variant="primary">Edit</Button>
-                        <Button className="mb-3" size="sm" variant="danger" onClick={() => deleteNote(note.noteId)}>Delete</Button>   
-                    </div>
-                </Card.Body>
+                <Fragment>
+                <Card key={index}>
+                    <Card.Title>{note.createdAt}</Card.Title>
+                    <Card.Body>
+                        {note.noteContent}
+                        <div style={{marginTop: "5px"}}>
+                            <EditNote note={note} />
+                            <Button className="mb-3" size="sm" variant="danger" onClick={() => deleteNote(note.noteId)}>Delete</Button>   
+                        </div>
+                    </Card.Body>
+                    
+                </Card>
                 
-            </Card>  
+            </Fragment>  
             )
         })
     }
@@ -42,6 +47,8 @@ export default function NoteCards(props){
             headers:{"Content-Type":"application/json"}                        
         })
     }
+
+   
 
     return (
            <Container>
