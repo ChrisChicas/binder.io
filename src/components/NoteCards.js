@@ -17,7 +17,7 @@ export default function NoteCards(props){
                     {note.noteContent}
                     <div style={{marginTop: "5px"}}>
                         <Button style={{marginRight: "5px"}} className="mb-3" size="sm" variant="primary">Edit</Button>
-                        <Button className="mb-3" size="sm" variant="danger">Delete</Button>   
+                        <Button className="mb-3" size="sm" variant="danger" onClick={() => deleteNote(note.noteId)}>Delete</Button>   
                     </div>
                 </Card.Body>
                 
@@ -29,12 +29,20 @@ export default function NoteCards(props){
     useEffect(()=>{
         getNotes()
     },[])
+
     const getNotes = async ()=>{
         let response = await fetch(`https://binder-io-api.herokuapp.com/notes/binder/${props.binderId}`)
         let data = await response.json()
         setNotes(data)
     }
-    
+
+    const deleteNote = async (noteId) => {
+        await fetch(`https://binder-io-api.herokuapp.com/notes/${noteId}`,
+            {method : 'DELETE',
+            headers:{"Content-Type":"application/json"}                        
+        })
+    }
+
     return (
            <Container>
                {cards}
