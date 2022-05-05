@@ -11,15 +11,15 @@ export default function CreateBinder(props){
     async function requirementCheck(e){
         e.preventDefault()
         //if newBinderName is not empty, run a fetch request, method POST, body including bindername and userId
-        if(newBinderName != ""){
+        if(newBinderName !== ""){
             let date = new Date()
             await fetch(`https://binder-io-api.herokuapp.com/userBinders/`,{
                     method : 'POST',
                     headers : {"Content-Type":"application/json"},
                     body : JSON.stringify({binderTitle : newBinderName,userId : props.userId, dateCreated : date.toUTCString()})
             })
+            props.setUpdate(!props.update)
         }
-       // window.location = "/binder"
     }
     
     return(
