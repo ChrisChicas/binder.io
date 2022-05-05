@@ -11,7 +11,7 @@ export default function CreateNote(props){
     async function requirementCheck(e){
         e.preventDefault()
         //if newNoteContent is not empty, run a fetch request, method POST, body including bindername and userId
-        if(newNoteContent != ""){
+        if(newNoteContent !== ""){
             //new date to pass as createdAt and updatedAt arguments
             let date = new Date()
             //cannot directly insert props.binderId into JSON object
@@ -21,10 +21,10 @@ export default function CreateNote(props){
                     headers : {"Content-Type":"application/json"},
                     body : JSON.stringify({binderId: binderId ,
                         noteContent : newNoteContent,
-                        userId : props.userId,
                         createdAt : date.toUTCString(),
                         updatedAt : date.toUTCString()})
             })
+            props.setUpdate(!props.update)
         }
         // window.location = "/"; need to update route for notes
     }
