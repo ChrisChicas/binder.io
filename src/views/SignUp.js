@@ -9,34 +9,24 @@ export default function SignUp(props){
     const [badAttempt, setBadAttempt] = useState(false)
     const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
-    const userData = {
-        userName : inputUserName,
-        password : inputPassword,
-        displayName : inputUserName        
-    }
 
     const requirementsCheck = async (e) => {
         e.preventDefault()
 
         if(inputUserName !== "" && inputPassword !== ""){
-            console.log(userData)
-            await fetch('https://binder-io-api.herokuapp.com/usertables/',
+            const response = await fetch('https://binder-io-api.herokuapp.com/usertables/',
                 {method : 'POST',
                 headers:{"Content-Type":"application/json"},
-                body : JSON.stringify(userData)
-                           
+                body : JSON.stringify({
+                    userName : inputUserName,
+                    password : inputPassword,
+                    displayName : inputUserName
+                })
             })
-            .then(data => data.json())
-            .then(data => {
-                props.setLoggedIn(true)
-                props.setUserId(data.userId)
-                navigate("/binder")
-            })
-            .catch(err =>{
-              console.log('ERROR' , err)
-              setErrMessage('Server Communication error, please try again')
-            })
-        
+            const resData = await response.json()
+            props.setLoggedIn(true)
+            props.setUserId(resData.data.userId)
+            navigate("/binder")    
         } else{
             setBadAttempt(true)
             setinputUserName("")
