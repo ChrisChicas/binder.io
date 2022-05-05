@@ -9,21 +9,28 @@ export default function LogIn(props){
     const navigate = useNavigate()
     const credentialsCheck = async (e) => {
         e.preventDefault()
-        const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertables/name/${inputUserName}`,{
-            method : "GET",
-            header: {"Content-Type":"application/json"}
-        })
-        const userData = await userResponse.json()
-        console.log(userData)
-        if(inputPassword == userData.password){
-            props.setLoggedIn(true)
-            props.setUserId(userData.userId)
-            navigate("/binder")
-        } else{
+        try {
+            const userResponse = await fetch(`https://binder-io-api.herokuapp.com/usertables/name/${inputUserName}`,{
+                method : "GET",
+                header: {"Content-Type":"application/json"}
+            })
+            const userData = await userResponse.json()
+            if(inputPassword == userData.password){
+                props.setLoggedIn(true)
+                props.setUserId(userData.userId)
+                navigate("/binder")
+            } else{
+                setBadAttempt(true)
+                setinputUserName("")
+                setInputPassword("")
+            }   
+        } catch (error) {
+            console.log(error)
             setBadAttempt(true)
             setinputUserName("")
-            setInputPassword("")
+            setInputPassword("")  
         }
+        
       }
 
 
