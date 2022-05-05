@@ -22,7 +22,6 @@ function App() {
           <Route path="/login" element={<LogIn setLoggedIn={setLoggedIn} setLoggedOut={setLoggedOut} setUserId={setUserId}/>}/>
           <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setUserId={setUserId}/>}/>
           <Route path="/binder" element={<BinderView userId={userId}/>}/>
-          <Route path="/note/:id" element={<NoteView/>}/>
         </Routes>
       </Router>
       
