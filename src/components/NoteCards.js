@@ -7,35 +7,38 @@ import CreateNote from './CreateNote'
 //function
 export default function NoteCards(props){
     const [notes, setNotes] = useState([])
-    const cards = []
-    
+    let cards
+    if (notes){
+        cards = notes.map((note, index) => {
+            return(
+              <Card key={index}>
+                <Card.Title>{note.createdAt}</Card.Title>
+                <Card.Body>
+                    {note.noteContent}
+                    <div style={{marginTop: "5px"}}>
+                        <Button style={{marginRight: "5px"}} className="mb-3" size="sm" variant="primary">Edit</Button>
+                        <Button className="mb-3" size="sm" variant="danger">Delete</Button>   
+                    </div>
+                </Card.Body>
+                
+            </Card>  
+            )
+        })
+    }
+
     useEffect(()=>{
         getNotes()
-        console.log(notes)
-        if(notes.length > 0){
-            cards = notes.map((note)=>{
-                return (
-                    <Card>
-                        <Card.Title>{note.dateCreated}</Card.Title>
-                        <Card.Body>
-                            {note.noteContent}
-                        </Card.Body>
-                        <Button variant="primary">Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                    </Card>
-                )
-            })//end .map function
-        }
     },[])
     const getNotes = async ()=>{
         let response = await fetch(`https://binder-io-api.herokuapp.com/notes/binder/${props.binderId}`)
-        let data = response.json()
+        let data = await response.json()
         setNotes(data)
     }
+    
     return (
            <Container>
-               <CreateNote binderId={props.binderId}/>
-               {notes.length > 0 && cards}
+               {cards}
+               <CreateNote binderId={props.binderId} getNotes={getNotes}/>
            </Container> 
             
         
