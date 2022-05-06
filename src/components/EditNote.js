@@ -9,7 +9,7 @@ const EditNote = (props) => {
   const requirementCheck = async (e)=>{
     e.preventDefault()
         
-        if(newNoteData != ""){
+        if(newNoteData !== ""){
             let date = new Date()
             await fetch(`https://binder-io-api.herokuapp.com/notes/${props.note.noteId}`,{
                     method : 'PUT',

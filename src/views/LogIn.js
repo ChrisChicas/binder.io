@@ -15,7 +15,7 @@ export default function LogIn(props){
                 header: {"Content-Type":"application/json"}
             })
             const userData = await userResponse.json()
-            if(inputPassword == userData.password){
+            if(inputPassword === userData.password){
                 props.setLoggedIn(true)
                 props.setUserId(userData.userId)
                 navigate("/binder")

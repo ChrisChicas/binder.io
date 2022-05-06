@@ -10,8 +10,7 @@ const EditBinder = (props) => {
   const requirementCheck = async (e)=>{
     e.preventDefault()
         
-        if(newBinderTitle != ""){
-            let date = new Date()
+        if(newBinderTitle !== ""){
             await fetch(`https://binder-io-api.herokuapp.com/userbinders/${props.binder.binderId}`,{
                     method : 'PUT',
                     headers : {"Content-Type":"application/json"},
