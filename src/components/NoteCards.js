@@ -20,7 +20,7 @@ export default function NoteCards(props){
                 <Card.Body>
                     {note.noteContent}
                     <div style={{marginTop: "5px"}}>
-                        <EditNote note={note}/>
+                        <EditNote note={note} update={update} setUpdate={setUpdate}/>
                         <Button className="mb-3" size="sm" variant="danger" onClick={() => deleteNote(note.noteId)}>Delete</Button>   
                     </div>
                 </Card.Body>

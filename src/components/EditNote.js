@@ -1,23 +1,23 @@
 import React, { Fragment, useState } from "react";
 import {Modal, Form, Button} from 'react-bootstrap'
-const EditNote = ({note}) => {
+const EditNote = (props) => {
   const [show, setShow] = useState(false)
   const handleClose = () => {setShow(false)}
   const handleShow = () => {setShow(true)}
-  const [newNoteData, setNewNoteData] = useState(note.noteContent)
+  const [newNoteData, setNewNoteData] = useState(props.note.noteContent)
 
   const requirementCheck = async (e)=>{
     e.preventDefault()
         
         if(newNoteData != ""){
             let date = new Date()
-            await fetch(`https://binder-io-api.herokuapp.com/notes/${note.noteId}`,{
+            await fetch(`https://binder-io-api.herokuapp.com/notes/${props.note.noteId}`,{
                     method : 'PUT',
                     headers : {"Content-Type":"application/json"},
                     body : JSON.stringify({noteContent : newNoteData, updatedAt : date.toUTCString()})
             })
         }
-       // window.location = "/binder"
+       props.setUpdate(!props.update)
   }
   return (
 
@@ -27,15 +27,15 @@ const EditNote = ({note}) => {
         show={show}
         onHide={handleClose}>
     <Modal.Header closeButton>
-  <Modal.Title>{note.createdAt}</Modal.Title>
+  <Modal.Title>{props.note.createdAt}</Modal.Title>
   </Modal.Header>
                         <Form onSubmit={(e)=>{
                           requirementCheck(e)
                           handleClose()
                         }}>
                             <Form.Group>
-                                <Form.Label>Binder Name</Form.Label>
-                                <Form.Control type="text" placeholder={note.noteContent} value={newNoteData} onChange={e => {setNewNoteData(e.target.value)}}/>
+                                <Form.Label></Form.Label>
+                                <Form.Control type="text" placeholder={props.note.noteContent} value={newNoteData} onChange={e => {setNewNoteData(e.target.value)}}/>
                             </Form.Group>
                             <Button variant="primary" type="submit">
                                 Save Changes

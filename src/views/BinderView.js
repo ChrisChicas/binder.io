@@ -1,6 +1,7 @@
 //Tabbed Binder Viewing page
 import CreateBinderForm from '../components/CreateBinder'
 import NoteCards from '../components/NoteCards'
+import EditBinderButton from '../components/EditBinder'
 import {React, useState, useEffect} from 'react'
 import {Tab, Tabs, Container, Button} from 'react-bootstrap'
 
@@ -13,6 +14,7 @@ export default function DocumentView(props){
         return (
             <Tab key={binder.binderId} title={binder.binderTitle} eventKey={`binder${binder.binderId}`}>
                 <NoteCards binderId={binder.binderId}/>
+                <EditBinderButton binder={binder} update={update} setUpdate={setUpdate}/>
                 <Button className="mb-3" size="sm" variant="danger" onClick={() => deleteBinder(binder.binderId)}>Delete Binder</Button>
             </Tab>
         )
