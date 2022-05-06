@@ -4,7 +4,7 @@ Milestone Project II for NJIT Coding Bootcamp, created by Darius M, Alex C, Chri
 
 ## Note Taking App
 
-Binder.io is a notetaking app that allows basic CRUD functionality.
+Binder.io is a notetaking app that allows basic CRUD functionality. Users will have Binders, and the notes will be tied to the binders. This renders in the Binder page as tabs with a list of notes.
 
 
 ### Features
@@ -40,6 +40,8 @@ Models for SQL Tables
 | Thurs. 4/28 | Darius | SideBar content. Binder.js content. Binder.js returns list of binders. Binder.js is currently imported into SideBar. Began work on LogIn form. |
 | Thurs. 4/28 | Chris | Styled Login/Signup forms slightly and added temp. login/signup & signout logic, including alerts for bad attempts. |
 | Sun. 5/1 | Chris | Tweaked const. names and added first draft login/signup server request logic. |
+| Wed. 5/4 | Darius | Fetch routes. Component tree shaving. |
+| Thurs. 5/5 | Chris, Darius, Alex | Edit Modals for Binder and Notes, dynamic rendering in binderview page. | 
 
 ## Project Planning
 | Date | Goals |
