@@ -15,6 +15,11 @@ Binders, Incomplete-Status, CRUD
 
 Task-List, Collaborative note-taking, extra styling
 
+## Important Links
+
+- Main App on Heroku: ([Link](https://binder-io.herokuapp.com))
+- API Github Repo: ([Link](https://github.com/dariusmcclendon/BinderAPI))
+
 ## Data Models
 
 Models for SQL Tables
