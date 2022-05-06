@@ -19,6 +19,7 @@ export default function CreateBinder(props){
                     body : JSON.stringify({binderTitle : newBinderName,userId : props.userId, dateCreated : date.toUTCString()})
             })
             props.setUpdate(!props.update)
+            setBinderName("")
         }
     }
     
