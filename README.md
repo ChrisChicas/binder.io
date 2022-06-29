@@ -9,7 +9,7 @@ Binder.io is a notetaking app that allows basic CRUD functionality. Users will h
 
 ### Features
 
-Binders, Incomplete-Status, CRUD
+Binders, Notes within binders, CRUD functionality for both binders and notes
 
 ### Bonus Features
 
