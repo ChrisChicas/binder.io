@@ -1,7 +1,7 @@
 import { Alert } from "react-bootstrap";
 import BinderImg from "../freebinder.png"
 
-export default function Home(props){
+export default function Home(props: { loggedOut: any; setLoggedOut: (arg0: boolean) => void; }){
     return(
         <div className="center">       
             {props.loggedOut ? <Alert variant="info" onClose={() => props.setLoggedOut(false)} dismissible>Successfully logged out.</Alert> : null}

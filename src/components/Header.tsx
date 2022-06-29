@@ -6,7 +6,7 @@ import {Nav, Navbar, Button, Container} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export default function Header(props){
+export default function Header(props: { setLoggedIn: (arg0: boolean) => void; setLoggedOut: (arg0: boolean) => void; loggedIn: boolean; }){
     const navigate = useNavigate()
     const signOut = () => {
         props.setLoggedIn(false)

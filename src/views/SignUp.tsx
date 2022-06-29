@@ -3,14 +3,14 @@ import { Form, Button, Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function SignUp(props){
+export default function SignUp(props: { setLoggedIn: (arg0: boolean) => void; setUserId: (arg0: any) => void; }){
     const [inputUserName, setinputUserName] = useState("")
     const [inputPassword, setInputPassword] = useState("")
     const [badAttempt, setBadAttempt] = useState(false)
     const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
 
-    const requirementsCheck = async (e) => {
+    const requirementsCheck = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
 
         if(inputUserName !== "" && inputPassword !== ""){

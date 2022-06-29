@@ -2,15 +2,15 @@
 import CreateBinderForm from '../components/CreateBinder'
 import NoteCards from '../components/NoteCards'
 import EditBinderButton from '../components/EditBinder'
-import {React, useState, useEffect} from 'react'
+import React, {useState, useEffect, JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal} from 'react'
 import {Tab, Tabs, Container, Button} from 'react-bootstrap'
 
-export default function DocumentView(props){
+export default function DocumentView(props: { userId: unknown }){
     //state variable for the binders array
-    const [binders, setBinders] = useState([])
+    const [binders, setBinders] = useState<any>([])
     const [update, setUpdate] = useState(false)
     //variable to store and populate the tabs for the page. Each tab should include the title of the binder, and it should pass the binderId to the NoteCards and delete button components.
-    const tabs = binders.map((binder)=>{
+    const tabs = binders.map((binder: { binderId: Key | null | undefined; binderTitle: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined })=>{
         return (
             <Tab key={binder.binderId} title={binder.binderTitle} eventKey={`binder${binder.binderId}`}>
                 <NoteCards binderId={binder.binderId}/>
@@ -20,7 +20,7 @@ export default function DocumentView(props){
         )
     })
 
-    const deleteBinder = async (binderId) => {
+    const deleteBinder = async (binderId: Key | null | undefined) => {
         await fetch(`https://binder-io-api.herokuapp.com/userbinders/${binderId}`,
             {method : 'DELETE',
             headers:{"Content-Type":"application/json"}                        
@@ -36,7 +36,7 @@ export default function DocumentView(props){
             setBinders(data)
         }
        fetchData()
-    }, [update])
+    }, [update,  props.userId])
     
     return (
         <div>

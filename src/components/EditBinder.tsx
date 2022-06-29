@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 import {Modal, Form, Button} from 'react-bootstrap'
 
-const EditBinder = (props) => {
+const EditBinder = (props: { binder: { binderTitle: any; binderId: any; }; setUpdate: (arg0: boolean) => void; update: any; }) => {
   const [show, setShow] = useState(false)
   const handleClose = () => {setShow(false)}
   const handleShow = () => {setShow(true)}
   const [newBinderTitle, setBinderTitle] = useState(props.binder.binderTitle)
 
-  const requirementCheck = async (e)=>{
+  const requirementCheck = async (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
         
         if(newBinderTitle !== ""){

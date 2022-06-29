@@ -1,18 +1,18 @@
 // Component meant to fit into BinderView.js, displaying Notes and a portion of their contents as cards.
 
 //imports
-import {React, useState, useEffect, Fragment} from 'react';
+import React, {useState, useEffect, useCallback, JSXElementConstructor, ReactElement, ReactFragment} from 'react';
 import {Card, Button, Container} from 'react-bootstrap';
 import CreateNote from './CreateNote'
 import EditNote from './EditNote'
 //function
-export default function NoteCards(props){
+export default function NoteCards(props: { binderId: unknown; }){
     const [notes, setNotes] = useState([])
     const [update, setUpdate] = useState(false)
 
-    let cards
+    let cards: string | number | boolean | JSX.Element[] | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | null | undefined
     if (notes){
-        cards = notes.map((note, index) => {
+        cards = notes.map((note: any, index) => {
             return(
             
               <Card key={index}>
@@ -29,30 +29,28 @@ export default function NoteCards(props){
         })
     }
 
+    const getNotes =  useCallback(async ()=>{
+            let response = await fetch(`https://binder-io-api.herokuapp.com/notes/binder/${props.binderId}`)
+            let data = await response.json()
+            setNotes(data)
+        }, [props.binderId]) 
+
+        const deleteNote = async (noteId: any) => {
+            await fetch(`https://binder-io-api.herokuapp.com/notes/${noteId}`,
+                {method : 'DELETE',
+                headers:{"Content-Type":"application/json"}                        
+            })
+            setUpdate(!update)
+        }
+        
     useEffect(()=>{
         getNotes()
-    },[update])
-
-    const getNotes = async ()=>{
-        let response = await fetch(`https://binder-io-api.herokuapp.com/notes/binder/${props.binderId}`)
-        let data = await response.json()
-        setNotes(data)
-    }
-
-    const deleteNote = async (noteId) => {
-        await fetch(`https://binder-io-api.herokuapp.com/notes/${noteId}`,
-            {method : 'DELETE',
-            headers:{"Content-Type":"application/json"}                        
-        })
-        setUpdate(!update)
-    }
-
-   
+    },[update, getNotes])
 
     return (
            <Container>
                {cards}
-               <CreateNote binderId={props.binderId} getNotes={getNotes} setUpdate={setUpdate} update={update}/>
+               <CreateNote binderId={props.binderId} setUpdate={setUpdate} update={update}/>
            </Container> 
             
         

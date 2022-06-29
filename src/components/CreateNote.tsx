@@ -1,14 +1,14 @@
 // Component for creating a new note
-import {React, useState} from 'react'
+import React, {useState} from 'react'
 import {Card, Form, Button} from 'react-bootstrap'
 
 
 //Component requires the binderId be passed as a prop. This should only be rendered INSIDE the binderTabs function for this reason. 
-export default function CreateNote(props){
+export default function CreateNote(props: { binderId: any; setUpdate: (arg0: boolean) => void; update: any }){
     //useState to hold newNoteContent variable
     const [newNoteContent, setNoteContent] = useState('')
     //requirement check
-    async function requirementCheck(e){
+    async function requirementCheck(e: { preventDefault: () => void; }){
         e.preventDefault()
         //if newNoteContent is not empty, run a fetch request, method POST, body including bindername and userId
         if(newNoteContent !== ""){

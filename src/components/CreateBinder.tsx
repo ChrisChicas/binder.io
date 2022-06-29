@@ -1,14 +1,14 @@
 // Component for creating a new binder screen
 
 //imports
-import {React, useState} from 'react'
+import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 
-export default function CreateBinder(props){
+export default function CreateBinder(props: { userId: any; setUpdate: (arg0: boolean) => void; update: any }){
     //binderName state
     let [newBinderName, setBinderName] = useState('')
     //requirement check
-    async function requirementCheck(e){
+    async function requirementCheck(e: { preventDefault: () => void; }){
         e.preventDefault()
         //if newBinderName is not empty, run a fetch request, method POST, body including bindername and userId
         if(newBinderName !== ""){

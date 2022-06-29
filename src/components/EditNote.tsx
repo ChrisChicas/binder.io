@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
 import {Modal, Form, Button} from 'react-bootstrap'
-const EditNote = (props) => {
+const EditNote = (props: { note: { noteContent: string | undefined; noteId: any; createdAt: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }; setUpdate: (arg0: boolean) => void; update: any; }) => {
   const [show, setShow] = useState(false)
   const handleClose = () => {setShow(false)}
   const handleShow = () => {setShow(true)}
   const [newNoteData, setNewNoteData] = useState(props.note.noteContent)
 
-  const requirementCheck = async (e)=>{
+  const requirementCheck = async (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
         
         if(newNoteData !== ""){
